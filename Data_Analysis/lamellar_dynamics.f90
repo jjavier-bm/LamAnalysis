@@ -1,6 +1,6 @@
 ! **********************************************************************
 ! *** LAMELLAR DI-BLOCK COPOLYMER + NANODIMERS *************************
-! *** Structural Data Analysis                 *************************
+! *** Dynamical Data Analysis                  *************************
 ! *** Author: J. Javier Burgos Mármol -- 2020  *************************
 ! **********************************************************************
 PROGRAM LamellarDynamics
