@@ -12,8 +12,8 @@ This repository includes the code used for the research published as Burgos-Már
 ## Cite this work
 If you make use of any of the codes in this repository for your own research, make sure you include the following two references in the corresponding publications:
 
-- The original article: Burgos-Mármol, J.J.; Patti, A. "Molecular Dynamics of Janus Nanodimers Dispersed inLamellar Phases of a Block Copolymer". *Polymers* **2021**, 1, 0. DOI: [doinumber](https://doi.org/)
-- This repository: Burgos-Mármol, J.J. Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite, [github.com/jjavier-bm/LamAnalysis](https://github.com/jjavier-bm/LamAnalysis), 2021.
+- <ins>The original article</ins>: Burgos-Mármol, J.J.; Patti, A. "Molecular Dynamics of Janus Nanodimers Dispersed inLamellar Phases of a Block Copolymer". *Polymers* **2021**, 1, 0. DOI: [doinumber](https://doi.org/)
+- <ins>This repository</ins>: Burgos-Mármol, J.J. Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite, [github.com/jjavier-bm/LamAnalysis](https://github.com/jjavier-bm/LamAnalysis), 2021.
 
 You can download both references from this repository in BibTeX format (`LamAnalysis.bib`).
 
