@@ -1,3 +1,7 @@
+# LamAnalysis
+Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite
+
+## LAMMPS scripts
 This folder contains the minimal scripts needed to reproduce what was done for the article.
 
 The scripts are separated into two folders: "pure", for the pristine polymer systems, and "pnc", as in polymer nanocomposites for the systems containing nanodimers.
