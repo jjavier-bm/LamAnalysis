@@ -33,6 +33,16 @@
 #OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 #OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+units           lj
+atom_style      molecular
+pair_style      lj/expand    1.1224620483093730     
+pair_modify     shift yes
+bond_style      fene
+angle_style     none
+dihedral_style  none
+improper_style  none
+boundary        p p p
+# ----------
 # read_data      data.wpc1.N00.PTtuned.lammpsdata
 read_restart    restart.wpc1.N00.PTtuned
 special_bonds   fene
