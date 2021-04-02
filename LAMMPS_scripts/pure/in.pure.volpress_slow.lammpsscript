@@ -43,7 +43,7 @@ dihedral_style  none
 improper_style  none
 boundary        p p p
 # ----------
-# read_data       data.pure.initial.lammpsdata
+# read_data     data.pure.lowpress.lammpsdata
 read_restart    restart.pure.lowpress
 special_bonds   fene
 
@@ -58,7 +58,7 @@ thermo_style    custom step temp etotal density press lx ly lz vol
 group           chains type 1 2
 
 ###################################
-# FAST CICLE
+# SLOW CICLE
 reset_timestep  0
 dump            snapshot all xyz 500000 slowcycle.xyz
 dump_modify     snapshot element C N
