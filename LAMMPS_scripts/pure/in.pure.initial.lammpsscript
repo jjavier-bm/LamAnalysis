@@ -1,0 +1,65 @@
+# **********************************************************************
+# *** LAMELLAR DI-BLOCK COPOLYMER + NANODIMERS *************************
+# *** LAMMPS script - 0 wt% - initial          *************************
+# *** Author: J. Javier Burgos Mármol -- 2021  *************************
+# **********************************************************************
+#BSD 3-Clause License
+#
+#Copyright (c) 2021, J. Javier Burgos-Mármol (Github username: jjavier-bm)
+#All rights reserved.
+#
+#Redistribution and use in source and binary forms, with or without
+#modification, are permitted provided that the following conditions are met:
+#
+#1. Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+#
+#2. Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+#
+#3. Neither the name of the copyright holder nor the names of its
+#   contributors may be used to endorse or promote products derived from
+#   this software without specific prior written permission.
+#
+#THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+#DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+#FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+#DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+#SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+#CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+#OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+#OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+units           lj
+atom_style      molecular
+pair_style      lj/expand    1.1224620483093730     
+pair_modify     shift yes
+bond_style      fene
+angle_style     none
+dihedral_style  none
+improper_style  none
+boundary        p p p
+# ----------
+read_data       data.pure.initial.lammpsdata
+special_bonds   fene
+
+pair_coeff         1   1   1.00   1.00   0.00   1.12246205
+pair_coeff         1   2  52.00   1.00   0.00   1.12246205
+pair_coeff         2   2   1.00   1.00   0.00   1.12246205
+bond_coeff         1   30.00   1.50   1.00   1.00
+
+timestep        0.001
+thermo          1000
+thermo_style    custom step temp etotal density press lx ly lz vol
+group           chains type 1 2
+restart         500000 restart.pure.thermalise
+
+dump            snapshot all xyz 10000 thermalise.pure.lammpstraj.xyz
+dump_modify     snapshot element C N
+###################################
+fix             1 all nvt temp 0.01 1.0 0.1 tchain 1
+run             10000000
+write_data	    data.pure.thermalised.lammpsdata
