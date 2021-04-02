@@ -5,7 +5,7 @@ Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar
 This folder contains the minimal scripts needed to reproduce what was done for the article.
 
 The scripts are separated into two folders: `pure`, for the pristine polymer systems, and `pnc`, as in polymer nanocomposites for the systems containing nanodimers.
-Only one of the particle mass fractions is represented in the script names, as the scripts are all the same regardless of the number of particles.
+Only one of the particle mass fractions is represented in the `pnc` script names, as the scripts are all the same regardless of the number of particles.
 
 The subfolders include the following scripts (listed by the order they were run):
 
