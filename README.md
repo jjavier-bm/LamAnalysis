@@ -1,5 +1,6 @@
 # LamAnalysis
-Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite
+**Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite**
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.802100.svg)](https://doi.org/10.5281/zenodo.802100)
 
 ## About
 This repository includes the code used for the research published as Burgos-Mármol, J.J.; Patti, A. *Polymers* **2021**, 1, 0. DOI: [doinumber](https://doi.org/). The content of this repository can be listed as follows:
