@@ -14,6 +14,6 @@ The subfolders include the following scripts sorted by the order they were run:
 3. **Equilibration**: Equilibration of the systems. Sometimes this run was not enough for systems to reach equilibrium and extra simulation time was assigned for it.
 4. **Production**: Generation of trajectories (raw data) for subsequent analysis.
 
-In the case of systems containing nanodimers, the first two steps were run for neutral particles only, while for the other particles equilibration started from the coordinates of neutral particles after the "Initial2" step.
+In the case of systems containing nanodimers, the first two steps were run for neutral particles only, while for the other particles equilibration started from the coordinates of neutral particles after step 2.
 
 For pristine polymers an expansion-contraction cycle was run between steps 2 and 3 to determine the phase behaviour and the Pressure for equilibration and production runs of all systems.
