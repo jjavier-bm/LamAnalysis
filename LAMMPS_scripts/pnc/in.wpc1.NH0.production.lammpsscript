@@ -1,0 +1,689 @@
+# **********************************************************************
+# *** LAMELLAR DI-BLOCK COPOLYMER + NANODIMERS *************************
+# *** LAMMPS script - 1 wt%  H0-NDs - production ***********************
+# *** Author: J. Javier Burgos Mármol -- 2021  *************************
+# **********************************************************************
+#BSD 3-Clause License
+#
+#Copyright (c) 2021, J. Javier Burgos-Mármol (Github username: jjavier-bm)
+#All rights reserved.
+#
+#Redistribution and use in source and binary forms, with or without
+#modification, are permitted provided that the following conditions are met:
+#
+#1. Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+#
+#2. Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+#
+#3. Neither the name of the copyright holder nor the names of its
+#   contributors may be used to endorse or promote products derived from
+#   this software without specific prior written permission.
+#
+#THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+#DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+#FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+#DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+#SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+#CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+#OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+#OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+units           lj
+atom_style      molecular
+pair_style      lj/expand    1.1224620483093730     
+pair_modify     shift yes
+bond_style      fene
+angle_style     none
+dihedral_style  none
+improper_style  none
+boundary        p p p
+# ----------
+# read_data      data.wpc1.NH0.equilibrated3.lammpsdata
+read_restart    restart.wpc1.NH0.equilibration3.300000000
+special_bonds   fene
+
+pair_coeff         1   1   1.00   1.00   0.00   1.12246205
+pair_coeff         1   2  52.00   1.00   0.00   1.12246205
+pair_coeff         1   3   1.00   1.00   1.00   1.12246205
+pair_coeff         1   4   1.00   1.00   1.00   1.12246205
+pair_coeff         2   2   1.00   1.00   0.00   1.12246205
+pair_coeff         2   3  52.00   1.00   1.00   1.12246205
+pair_coeff         2   4   1.00   1.00   1.00   1.12246205
+pair_coeff         3   3  52.00   1.00   2.00   1.12246205
+pair_coeff         3   4  52.00   1.00   2.00   1.12246205
+pair_coeff         4   4  52.00   1.00   2.00   1.12246205
+bond_coeff         1   30.00   1.50   1.00   1.00
+bond_coeff         2   15.00   3.00   1.00   3.00
+
+timestep        0.001
+thermo          1000
+thermo_style    custom step temp etotal density press lx ly lz vol
+group           chains type 1 2
+group           nps type 3 4
+
+reset_timestep  0
+variable        s equal logfreq(1,9,10)
+
+velocity        all zero linear
+
+restart         5000000 restart.wpc1.NH0.production
+
+fix             1 all npt temp 1.0 1.0 0.1 tchain 1 aniso 11.3 11.3 1.0
+
+compute         myStress all stress/atom NULL # Units in Press*Vol. Press=-(Jxx+Jyy+Jzz)/(3*vol)
+
+# STRUCTURE TRAJECTORIES
+
+dump            xyzdump all xyz 500000  traj.production.lin.wpc1.NH0.lammpstraj.xyz
+dump_modify     xyzdump element C N Rb Ba
+
+dump            stdump all custom 500000 traj.production.lin.wpc1.NH0.lammpstrj id x y z ix iy iz vx vy vz c_myStress[*]
+dump_modify     stdump first yes
+
+# DYNAMICS TRAJECTORIES
+reset_timestep  0
+dump            msddump all custom 1000 fort.101 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s first yes
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.102 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.103 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.104 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.105 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.106 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.107 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.108 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.109 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.110 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.111 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.112 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.113 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.114 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.115 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.116 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.117 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.118 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.119 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.120 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.121 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.122 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.123 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.124 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.125 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.126 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.127 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.128 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.129 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.130 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.131 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.132 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.133 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.134 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.135 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.136 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.137 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.138 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.139 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.140 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.141 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.142 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.143 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.144 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.145 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.146 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.147 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.148 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.149 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.150 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.151 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.152 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.153 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.154 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.155 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.156 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.157 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.158 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.159 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.160 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.161 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.162 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.163 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.164 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.165 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.166 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.167 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.168 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.169 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.170 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.171 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.172 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.173 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.174 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.175 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.176 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.177 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.178 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.179 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.180 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.181 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.182 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.183 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.184 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.185 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.186 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.187 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.188 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.189 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.190 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.191 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.192 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.193 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.194 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.195 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.196 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+
+run             1000000
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.197 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.198 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.199 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+
+reset_timestep  0
+undump          msddump
+dump            msddump all custom 1000 fort.200 id xu yu zu vx vy vz c_myStress[*]
+dump_modify     msddump every v_s
+run             1000000
+# END
+
+write_data	    data.wpc1.NH0.productiondone.lammpsdata
