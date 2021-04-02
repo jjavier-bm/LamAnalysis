@@ -16,7 +16,7 @@ The subfolders include the following scripts (listed by the order they were run)
   4. **Equilibration**: Equilibration of the systems at desired pressure and density. Sometimes this run was not enough for systems to reach equilibrium and extra simulation time was assigned for it.
   5. **Production**: Generation of trajectories (raw data) for subsequent analysis.
 
-- Polymer nanocomposite (`wpcx`, with x>0, meaning x wt%):
+- Polymer nanocomposite (`wpcx`, with x>0, meaning mass fraction = x wt%):
   1. **Initial**: Thermalisation and Pressurisation of the systems (desired pressure previously determined for pure polymer).
   2. **Equilibration**: Equilibration of the systems at desired pressure and density. Sometimes this run was not enough for systems to reach equilibrium and extra simulation time was assigned for it.
   3. **Production**: Generation of trajectories (raw data) for subsequent analysis.
