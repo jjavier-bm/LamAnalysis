@@ -7,13 +7,18 @@ This folder contains the minimal scripts needed to reproduce what was done for t
 The scripts are separated into two folders: `pure`, for the pristine polymer systems, and `pnc`, as in polymer nanocomposites for the systems containing nanodimers.
 Only one of the particle mass fractions is represented in the script names, as the scripts are all the same regardless of the number of particles.
 
-The subfolders include the following scripts sorted by the order they were run:
+The subfolders include the following scripts (listed by the order they were run):
 
-1. **Initial**: Thermalisation of the systems.
-2. **Initial2**: Pressurisation of the systems.
-3. **Equilibration**: Equilibration of the systems. Sometimes this run was not enough for systems to reach equilibrium and extra simulation time was assigned for it.
-4. **Production**: Generation of trajectories (raw data) for subsequent analysis.
+- Pure polymer:
+  1. **Initial**: Thermalisation at an estimated pressure.
+  2. **Initial2**: Expansion of systems (lowering pressure).
+  3. **Fast and slow Cycles**: Two independent runs to produce the Pressure vs Density curve and determine the pressure for the desired density value.
+  4. **Equilibration**: Equilibration of the systems at desired pressure and density. Sometimes this run was not enough for systems to reach equilibrium and extra simulation time was assigned for it.
+  5. **Production**: Generation of trajectories (raw data) for subsequent analysis.
 
-In the case of systems containing nanodimers, the first two steps were run for neutral particles only, while for the other particles equilibration started from the coordinates of neutral particles after step 2.
+- Polymer nanocomposite (`wpcx`, with x>0, meaning x wt%):
+  1. **Initial**: Thermalisation and Pressurisation of the systems (desired pressure previously determined for pure polymer).
+  2. **Equilibration**: Equilibration of the systems at desired pressure and density. Sometimes this run was not enough for systems to reach equilibrium and extra simulation time was assigned for it.
+  3. **Production**: Generation of trajectories (raw data) for subsequent analysis.
 
-For pristine polymers an expansion-contraction cycle was run between steps 2 and 3 to determine the phase behaviour and the Pressure for equilibration and production runs of all systems.
+  Note: In the case of systems containing nanodimers, the first two steps were run for neutral particles only, while for the other particles equilibration started from the coordinates of neutral particles after step 2.
