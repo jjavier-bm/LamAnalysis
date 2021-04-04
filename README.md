@@ -1,7 +1,7 @@
 # LamAnalysis
 **Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite**
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.802100.svg)](https://doi.org/10.5281/zenodo.802100)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.802100.svg)](https://doi.org/10.5281/zenodo.4660283)
 
 ## About
 This repository includes the code used for the research published as Burgos-Mármol, J.J.; Patti, A. *Polymers* **2021**, 1, 0. DOI: [doinumber](https://doi.org/). The content of this repository can be listed as follows:
@@ -15,7 +15,7 @@ This repository includes the code used for the research published as Burgos-Már
 If you make use of any of the codes in this repository for your own research, make sure you include the following two references in the corresponding publications:
 
 - <ins>The original article</ins>: Burgos-Mármol, J.J.; Patti, A. "Molecular Dynamics of Janus Nanodimers Dispersed inLamellar Phases of a Block Copolymer". *Polymers* **2021**, 1, 0. doi: [doinumber](https://doi.org/)
-- <ins>This repository</ins>: Burgos-Mármol, J.J. LamAnalysis: Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite, 2021. doi: [10.5281/zenodo.802100](https://doi.org/10.5281/zenodo.802100).
+- <ins>This repository</ins>: Burgos-Mármol, J.J. LamAnalysis: Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite, 2021. doi: [10.5281/zenodo.4660283](https://doi.org/10.5281/zenodo.4660283).
 
 You can download both references from this repository in BibTeX format (`LamAnalysis.bib`).
 
