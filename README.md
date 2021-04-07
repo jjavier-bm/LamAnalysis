@@ -9,6 +9,7 @@ This repository includes the code used for the research published as Burgos-Már
 - A ``FORTRAN`` file that generates LAMMPS scripts and LAMMPS data files.
 - A ``FORTRAN`` file for structural analysis.
 - A ``FORTRAN`` file for dynamical analysis.
+- A ``Python`` script to remove duplicated configurations from linear trajectories and create a single long log trajectory from 100 shorter log trajectories.
 - A series of LAMMPS scripts
 
 ## Cite this work
