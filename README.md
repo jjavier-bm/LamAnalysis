@@ -17,7 +17,7 @@ Lamellar Phases of a Block Copolymer. *Polymers* **2021**, 13, 1524. doi: [10.33
 If you make use of any of the codes in this repository for your own research, make sure you include the following two references in the corresponding publications:
 
 - <ins>The original article</ins>: Burgos-Mármol, J.J.; Patti, A. "Molecular Dynamics of Janus Nanodimers Dispersed in Lamellar Phases of a Block Copolymer". *Polymers* **2021**, 13, 1524. doi: [10.3390/polym13091524](https://doi.org/10.3390/polym13091524).
-- <ins>This repository</ins>: Burgos-Mármol, J.J. LamAnalysis: Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite, 2021. doi: [10.5281/zenodo.4660283](https://doi.org/10.5281/zenodo.4660283).
+- <ins>This repository</ins>: Burgos-Mármol, J.J. LamAnalysis: Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite, *Zenodo* **2021**. doi: [10.5281/zenodo.4660283](https://doi.org/10.5281/zenodo.4660283).
 
 You can download both references from this repository in BibTeX format (`LamAnalysis.bib`).
 
