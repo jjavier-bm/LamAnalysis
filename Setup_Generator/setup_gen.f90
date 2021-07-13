@@ -159,10 +159,11 @@ Call files(wpcpart,fdata,fscript,fxyz)
 Call ChainPlacing(Nchains,Lchains,RbondEqChains,REV(1,1)+Rcutoff,Lfactors,RChain,ichain)
 !print*, 'chains done'
 Lbox(1)=RChain(Lfactors(3)*Lfactors(1),Lchains,1)+RbondEqChains/2.d0
-Lbox(2)=RChain(Nchains,Lchains,2)-RChain(1,1,2)+&
-        2.d0*(REV(1,3)+Rcutoff)+(Lpfactors(2)-1)*(REV(3,3)+Rcutoff)
+Lbox(2)=RChain(Nchains,Lchains,2)-RChain(1,1,2)+REV(1,1)+Rcutoff
 Lbox(3)=RChain(Lfactors(3),Lchains,3)+RbondEqChains/2.d0
 IF (Npart>0) THEN
+    Lbox(2)=Lbox(2)-(REV(1,1)+Rcutoff)+2.d0*(REV(1,3)+Rcutoff)+&
+                    (Lpfactors(2)-1)*(REV(3,3)+Rcutoff)
     Call PartPlacing(Npart,Lpfactors, Lfactors,PartSlot, Lbox, &
                      RbondEqNP,REV(3,3)+Rcutoff,REV(1,3)+Rcutoff, Rpart,ipart)
     Call ChainRealloc(int(Lfactors(2)/Lpfactors(2)),REV(3,3)+Rcutoff,&
@@ -407,10 +408,10 @@ DO i=1,f(3)
         END IF
     END DO
 END DO
-!print*, 'First 3 chains placed'
+!print*, 'First ', f(3), ' chains placed'
 dir=-dir
 r0(1)=r0(1)+rdist
-r0(3)=R(3,L/2,3)
+r0(3)=R(f(3),L/2,3)
 DO i=f(3)+1, 2*f(3)
     DO j=1,L
         DO k=1,3
