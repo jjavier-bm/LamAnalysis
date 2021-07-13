@@ -563,9 +563,9 @@ IF (w<10.d0 .and. w>=1.d0) write (f1, "(A8,I1,A23)") "data.wpc", INT(w),".N00.in
 IF (w>=10.d0) write (f1, "(A8,I2,A23)") "data.wpc", INT(w),".N00.initial.lammpsdata"
 
 IF (w==0.d0) f2='in.pure.initial.lammpsscript'
-IF (w<1.d0 .and. w>0.d0) write (f2, "(A7,I1,A24)") "in.wpc0", INT(w*10),".N00.initial.lammpsscript"
-IF (w<10.d0 .and. w>=1.d0) write (f2, "(A6,I1,A24)") "in.wpc", INT(w),".N00.initial.lammpsscript"
-IF (w>=10.d0) write (f2, "(A6,I2,A24)") "in.wpc", INT(w),".N00.initial.lammpsscript"
+IF (w<1.d0 .and. w>0.d0) write (f2, "(A7,I1,A25)") "in.wpc0", INT(w*10),".N00.initial.lammpsscript"
+IF (w<10.d0 .and. w>=1.d0) write (f2, "(A6,I1,A25)") "in.wpc", INT(w),".N00.initial.lammpsscript"
+IF (w>=10.d0) write (f2, "(A6,I2,A25)") "in.wpc", INT(w),".N00.initial.lammpsscript"
 
 IF (w==0.d0) f3='traj.pure.initial.xyz'
 IF (w<1.d0 .and. w>0.d0) write (f3, "(A9,I1,A16)") "traj.wpc0", INT(w*10),".N00.initial.xyz"
