@@ -1,6 +1,7 @@
 # LamAnalysis
 **Code for Simulation and Analysis of a Coarse-Grained di-Block Copolymer Lamellar Phase Nanocomposite**
 
+[![DOI](http://img.shields.io/badge/DOI-10.3390/polym13091524-3A145B.svg)](https://doi.org/10.3390/polym13091524)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4660283.svg)](https://doi.org/10.5281/zenodo.4660283)
 
 ## About
